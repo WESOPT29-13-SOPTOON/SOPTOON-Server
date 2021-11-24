@@ -14,6 +14,19 @@ const getAllComments = async (client, webtoonId) => {
     return convertSnakeToCamel.keysToCamel(rows);
 };
 
+const getBestComments = async (client, webtoonId) => {
+    const { rows } = await client.query(
+        `
+        SELECT comment_id, nickname, email, comment, created_at, like_count
+        FROM "comment" c 
+        JOIN "user" u ON c.user_id = u.user_id
+        WHERE webtoon_id = $1
+        ORDER BY like_count DESC
+        `, [webtoonId]
+    );
+    return convertSnakeToCamel.keysToCamel(rows);
+}
 module.exports = {
-    getAllComments
+    getAllComments,
+    getBestComments
 };
