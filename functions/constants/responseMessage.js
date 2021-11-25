@@ -7,4 +7,8 @@ module.exports = {
     READ_BEST_COMMENT_SUCCESS: "베스트 댓글 조회 성공",
 
     INTERNAL_SERVER_ERROR: "서버 내부 오류",
+
+    //추천 웹툰 조회 
+    RECOMMEND_LIST_IMPORT_SUCCESS: "추천 웹툰 불러오기 성공",
+    WRITE_COMMENT_SUCCESS: "댓글 작성 성공",
 };
