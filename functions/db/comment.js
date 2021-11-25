@@ -26,7 +26,27 @@ const getBestComments = async (client, webtoonId) => {
     );
     return convertSnakeToCamel.keysToCamel(rows);
 }
+const writeComment = async (client, email, comment, webtoonId) => {
+    const result = await client.query(
+        `
+        SELECT user_id
+        FROM "user" u
+        WHERE email = $1
+        `, [email]
+    );
+    const { rows } = await client.query(
+        `INSERT INTO comment 
+        (user_id, comment, webtoon_id, like_count)
+        VALUES
+        ($1,$2,$3,$4)
+        RETURNING *
+        `,
+        [result.rows[0].user_id, comment, webtoonId, 0],
+    );
+    return convertSnakeToCamel.keysToCamel(rows);
+};
 module.exports = {
     getAllComments,
-    getBestComments
+    getBestComments,
+    writeComment
 };
