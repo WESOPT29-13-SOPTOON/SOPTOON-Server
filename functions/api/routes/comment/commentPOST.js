@@ -6,8 +6,7 @@ const db = require('../../../db/db');
 const { commentDB } = require('../../../db');
 
 module.exports = async (req, res) => {
-    const { email, comment } = req.body;
-    const { webtoonId } = req.params;
+    const { webtoonId, email, comment } = req.body;
     if (!email || !comment || !webtoonId) {
         return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NULL_VALUE));
     }
