@@ -3,14 +3,20 @@ const util = require('../../../lib/util');
 const statusCode = require('../../../constants/statusCode');
 const responseMessage = require('../../../constants/responseMessage');
 const db = require('../../../db/db');
-const { webtoonDB } = require('../../../db');
+const { commentDB } = require('../../../db');
 
 module.exports = async (req, res) => {
+    const { email, comment } = req.body;
+    const { webtoonId } = req.params;
+    if (!email || !comment || !webtoonId) {
+        return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NULL_VALUE));
+    }
     let client;
     try {
         client = await db.connect(req);
-        const webtoons = await webtoonDB.getRecommendWebtoons(client);
-        res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.RECOMMEND_LIST_IMPORT_SUCCESS, webtoons));
+        const write = await commentDB.writeComment(client, email, comment, webtoonId);
+        // 성공적으로  가져왔다면, response를 보내줍니다. 
+        res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.WRITE_COMMENT_SUCCESS, write));
     } catch (error) {
         functions.logger.error(`[ERROR] [${req.method.toUpperCase()}] ${req.originalUrl}`, `[CONTENT] ${error}`);
         console.log(error);
