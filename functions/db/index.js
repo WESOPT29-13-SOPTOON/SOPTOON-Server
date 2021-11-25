@@ -1,3 +1,4 @@
 module.exports = {
-    commentDB: require('./comment')
+    commentDB: require('./comment'),
+    webtoonDB: require('./webtoon')
 };
