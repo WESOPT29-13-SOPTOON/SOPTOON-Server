@@ -33,6 +33,42 @@
   }
  ```
  
+### 📁 Foldering
+
+``` javascript
+
+📁 functions _ 
+            |_ 📁 api _ 
+		    |         |_ 📋 index.js
+		    |         |_ 📁 routes _
+		    |                      |_ 📋 index.js
+		    |                      |_ 📁 webtoon _
+            |                                    |_ 📋 index.js
+            |                                    |_ 📋 recommentGET.js
+            |
+			|                      |_ 📁 comment _
+            |                                    |_ 📋 index.js
+            |                                    |_ 📋 commentGET.js
+            |                                    |_ 📋 commentPOST.js
+            |                                    |_ 📋 bestCommentGET.js
+			|
+            |_ 📁 constants _ 
+			|               |_ 📋responseMessage.js
+		    |               |_ 📋 statusCode.js
+			|
+			|_ 📁 lib _ 
+		    |		   |_ 📋 util.js
+            |
+			|_ 📁 db _
+                      |_ 📋 index.js
+                      |_ 📋 db.js
+                      |_ 📋 comment.js
+                      |_ 📋 webtoon.js                 
+
+```
+
+
+
 ### 📌 Branch Strategy
 
 <details>
